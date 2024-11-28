@@ -12,13 +12,14 @@ import {
     Platform,
     ActivityIndicator
   } from "react-native";
-  import { MaterialIcons } from '@expo/vector-icons';
   import { themas } from "../../global/themes";
   import logo from '../../assets/logo.jpeg';
   import { style } from "./style";
   import { useState } from "react";
   import { useAuth } from '../../hooks/auth'
-  
+  import {Input} from '../../components/Input/'
+  import { MaterialIcons, Octicons } from '@expo/vector-icons';
+
   export default function Login() {
     const [email, setEmail] = useState("")
     const [password, setPassword]  = useState("")
@@ -60,36 +61,20 @@ import {
               </View>
   
               <View style={style.boxMid}>
-                <Text style={style.titleInput}>E-mail</Text>
-                <View style={style.inputArea}>
-                  <TextInput 
-                    style={style.input} 
-                    placeholder="Digite seu e-mail"
-                    keyboardType="email-address"
-                    autoCapitalize="none"
+                  <Input
+                    value={email}
                     onChangeText={setEmail}
+                    title="E-mail"
+                    IconRight={Materiaicons}
+                    iconRightName="email"
                   />
-                  <MaterialIcons
-                    name="email"
-                    size={20}
-                    color={themas.Colors.gray}
-                  />
-                </View>
-  
-                <Text style={style.titleInput}>Senha</Text>
-                <View style={style.inputArea}>
-                  <TextInput 
-                    style={style.input} 
-                    placeholder="Digite sua senha"
-                    secureTextEntry
+                  <Input
+                    value={password}
                     onChangeText={setPassword}
+                    title="Senha"
+                    IconRight={Octicons}
+                    iconRightName="eye-coled"
                   />
-                  <MaterialIcons
-                    name="remove-red-eye"
-                    size={20}
-                    color={themas.Colors.gray}
-                  />
-                </View>
               </View>
   
               <View style={style.boxBottom}>
