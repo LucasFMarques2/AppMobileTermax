@@ -27,7 +27,6 @@ function AuthProvider({ children }) {
       }
     }
   }
-  
 
   async function signOut() {
     // Remover os dados armazenados localmente
@@ -86,11 +85,10 @@ function AuthProvider({ children }) {
     }
 
     loadStorageData();
-  }, []);
+  }, []); 
 
-  // Função para verificar se o usuário é admin
-  const isAdmin = data.user?.isAdmin === 1; // Aqui ajustamos a lógica
-
+  
+  const isAdmin = data.user?.isAdmin === 1; 
   return (
     <AuthContext.Provider
       value={{
@@ -98,7 +96,7 @@ function AuthProvider({ children }) {
         signOut,
         updateProfile,
         user: data.user,
-        isAdmin, 
+        isAdmin,
       }}
     >
       {children}

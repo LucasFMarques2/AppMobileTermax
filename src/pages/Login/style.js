@@ -20,7 +20,7 @@ export const style = StyleSheet.create({
         paddingHorizontal: 27
     },
     boxBottom:{
-        height: Dimensions.get('window').height/7,
+        height: Dimensions.get('window').height/4,
         width: '100%',
         alignItems: 'center',
         marginTop: 30
@@ -32,7 +32,8 @@ export const style = StyleSheet.create({
     text:{
         fontWeight: 'bold',
         marginTop: 40,
-        fontSize: 20
+        fontSize: 20,
+        textAlign: 'center'
     },
     button:{
         width: 200,
@@ -54,5 +55,12 @@ export const style = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
         
-    }
+    },
+    checkboxContainer: {
+        flexDirection: 'row',
+        marginBottom: 20,
+      },
+      checkbox: {
+        alignSelf: 'center',
+      },
 })

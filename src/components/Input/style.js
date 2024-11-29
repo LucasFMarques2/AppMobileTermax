@@ -1,9 +1,8 @@
 import {StyleSheet} from 'react-native'
 import {themas} from '../../global/themes'
 
-
 export const style = StyleSheet.create({
-    inputArea:{
+    inputArea: {
         flexDirection: 'row',
         width: '100%',
         borderWidth: 1,
@@ -12,15 +11,16 @@ export const style = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: themas.Colors.lightGray,
         borderColor: themas.Colors.lightGray,
+        height: 50, 
         shadowColor: "#000000",
         shadowOffset: {
-        width: 0,
-        height: 1,
+            width: 0,
+            height: 1,
         },
-        shadowOpacity:  0.16,
+        shadowOpacity: 0.16,
         shadowRadius: 1.51,
-        elevation: 2
-    },
+        elevation: 2,
+    },    
     input:{
         height: '100%',
         width: '90%',
