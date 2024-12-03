@@ -10,7 +10,8 @@ import {
   ScrollView,
   Platform,
   ActivityIndicator,
-  TouchableOpacity
+  TouchableOpacity,
+  Alert
 } from "react-native";
 
 import logo from '../../assets/logo.jpeg';
@@ -24,7 +25,6 @@ import CustomCheckbox from '../../components/Checkbox';
 export default function Login({ navigation}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
   const [hiddePassword, setHiddePassword] = useState(true);
   const [rememberEmail, setRememberEmail] = useState(false);
   const { signIn } = useAuth();
@@ -59,23 +59,23 @@ export default function Login({ navigation}) {
   }
 
   const handleLogin = async () => {
-    if (!email || !password) {
-      alert("Por favor, preencha todos os campos!");
-      return;
+    if(!email || !password){
+      Alert.alert('Por favor, preencha todos os campos')
+      return
     }
-
-    try {
-      setLoading(true);
-      await signIn({ email, password });
-      setTimeout(() => {
-        setLoading(false);
+    try{
+      const success = await signIn({email, password})
+      if( success ){
         navigation.reset({routes:[{name: "BottomRoutes"}]});
-      }, 1000);
-    } catch (error) {
-      console.error(error);
-      setLoading(false);
+      } 
+    } catch (error){
+      setLoading(true)
+      Alert.alert(error)
     }
   };
+
+ ;
+  
 
   return (
     <KeyboardAvoidingView
@@ -89,8 +89,8 @@ export default function Login({ navigation}) {
             keyboardShouldPersistTaps="handled"
           >
             <View style={style.boxTop}>
-              <Image source={logo} style={style.logo} resizeMethod="contain" />
               <Text style={style.text}>Bem-vindo! Faça o login</Text>
+              <Image source={logo} style={style.logo} resizeMethod="contain" />
             </View>
 
             <View style={style.boxMid}>
@@ -118,10 +118,7 @@ export default function Login({ navigation}) {
 
             <View style={style.boxBottom}>
               <TouchableOpacity style={style.button} onPress={handleLogin}>
-                {loading 
-                  ? <ActivityIndicator color={'#ffffff'} size={'small'} /> 
-                  : <Text style={style.textButton}>Entrar</Text>
-                }
+                  <Text style={style.textButton}>Entrar</Text>
               </TouchableOpacity>
             </View>
           </ScrollView>

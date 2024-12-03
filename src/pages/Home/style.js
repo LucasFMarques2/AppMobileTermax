@@ -5,5 +5,5 @@ export const style = StyleSheet.create({
         flex:1,
         alignItems: 'center'
     },
-    Headers
+
 })

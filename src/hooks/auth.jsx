@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage"; // Import do AsyncStorage
 import { api } from "../services/api";
+import { Alert } from "react-native";
 
 export const AuthContext = createContext({});
 
@@ -12,21 +13,23 @@ function AuthProvider({ children }) {
       const response = await api.post("session", { email, password });
       const { user, token } = response.data;
   
-      // Armazenar os dados localmente com AsyncStorage
       await AsyncStorage.setItem("@termax:user", JSON.stringify(user));
       await AsyncStorage.setItem("@termax:token", token);
   
       api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       setData({ user, token });
-      alert("Login realizado com sucesso!");
+      Alert.alert("Login realizado com sucesso!");
+      return true;
     } catch (err) {
       if (err.response) {
-        alert(err.response.data.message);
+        Alert.alert(err.response.data.message);
       } else {
-        alert("Não foi possível logar");
+        Alert.alert("Não foi possível logar"); 
       }
+      return false;
     }
   }
+  
 
   async function signOut() {
     // Remover os dados armazenados localmente
@@ -51,7 +54,7 @@ function AuthProvider({ children }) {
         await AsyncStorage.setItem("@termax:user", JSON.stringify(user));
         setData({ user, token: data.token });
 
-        alert("Avatar atualizado");
+        Alert.alert("Avatar atualizado");
       } else {
         await api.put("/users", user);
 
@@ -59,13 +62,13 @@ function AuthProvider({ children }) {
         await AsyncStorage.setItem("@termax:user", JSON.stringify(user));
         setData({ user, token: data.token });
 
-        alert("Perfil atualizado");
+        Alert.alert("Perfil atualizado");
       }
     } catch (err) {
       if (err.response) {
-        alert(err.response.data.message);
+        Alert.alertt(err.response.data.message);
       } else {
-        alert("Não foi possível alterar informações");
+        Alert.alert("Não foi possível alterar informações");
       }
     }
   }
