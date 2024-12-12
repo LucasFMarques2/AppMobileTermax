@@ -9,7 +9,6 @@ import {
   TouchableWithoutFeedback, 
   ScrollView,
   Platform,
-  ActivityIndicator,
   TouchableOpacity,
   Alert
 } from "react-native";

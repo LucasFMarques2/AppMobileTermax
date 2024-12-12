@@ -2,7 +2,7 @@ export const themas = {
     Colors :{
         primary:'#f7ce10',
         secondary:'#ffffff',
-        lightGray:'#d7d8d7',
+        lightGray:'#dadada',
         gray:'gray',
         bgScreen:'#f1f7fa',
         red:'#FF494C',

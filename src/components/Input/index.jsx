@@ -11,7 +11,8 @@ export const Input = forwardRef((props, ref) => {
         iconRightName, 
         title, 
         onIconLeftPress, 
-        onIconRigthPress, 
+        onIconRigthPress,
+        iconSize = 24,
         labelStyle, 
         ...rest 
     } = props;
@@ -33,7 +34,7 @@ export const Input = forwardRef((props, ref) => {
                 />
                 {IconRigth && iconRightName && (
                     <TouchableOpacity onPress={onIconRigthPress} style={style.Button}>
-                        <IconRigth name={iconRightName} size={20} color={themas.Colors.gray} style={style.Icon} />
+                        <IconRigth name={iconRightName} size={iconSize} color={themas.Colors.gray} style={style.Icon} />
                     </TouchableOpacity>
                 )}
             </View>
