@@ -22,12 +22,12 @@ export default function Home() {
     const [searchTerm, setSearchTerm] = useState("");
     const [filteredData, setFilteredData] = useState([]);
     const {supplyList} = useContext(AuthContextList)
-
+    
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await api.get('/abastecimento');
-                const sortedData = response.data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at)); 
+                const sortedData = response.data.sort((a, b) => new Date(b.id) - new Date(a.id)); 
                 setData(sortedData);
                 setFilteredData(sortedData);
             } catch (error) {
