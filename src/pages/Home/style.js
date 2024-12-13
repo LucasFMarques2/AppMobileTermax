@@ -44,12 +44,11 @@ export const style = StyleSheet.create({
         elevation: 3,
     },
     rowCardTop: {  
-        flexDirection: 'row',
         width: '50%',
     },
     rowCardBottom: {  
         flexDirection: 'row',
-        width: '50%', 
+        width: '80%', 
     },
     tituloCard: {
         fontSize: 12,
@@ -67,6 +66,13 @@ export const style = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         marginTop: 60,
-        marginBottom: -50
-    }
+        marginBottom: -10
+    },
+    emptyMessage: {
+        textAlign: 'center',
+        fontSize: 16,
+        color: 'gray',
+        marginTop: 200,
+    },
+    
 })
