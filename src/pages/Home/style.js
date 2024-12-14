@@ -74,5 +74,53 @@ export const style = StyleSheet.create({
         color: 'gray',
         marginTop: 200,
     },
+    modalContainer: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "rgba(0, 0, 0, 0.5)",
+    },
+    modalContent: {
+        width: "80%",
+        padding: 20,
+        backgroundColor: "white",
+        borderRadius: 10,
+        alignItems: "center",
+    },
+    modalTitle: {
+        fontSize: 18,
+        fontWeight: "bold",
+        marginBottom: 10,
+    },
+    input: {
+        width: "100%",
+        borderWidth: 1,
+        borderColor: "gray",
+        borderRadius: 5,
+        padding: 10,
+        marginBottom: 20,
+    },
+    modalButtons: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        width: "100%",
+    },
+    saveButton: {
+        backgroundColor: "green",
+        padding: 10,
+        borderRadius: 5,
+        marginRight: 10,
+    },
+    closeButton: {
+        backgroundColor: "red",
+        padding: 10,
+        borderRadius: 5,
+    },
+    buttonText: {
+        color: "white",
+        fontWeight: "bold",
+        textAlign: "center",
+    },
+    
     
 })

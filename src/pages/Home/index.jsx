@@ -1,4 +1,4 @@
-import { FlatList } from "react-native-gesture-handler";
+import { FlatList, Modal, TextInput } from "react-native";
 import React, { useState, useEffect, useContext } from "react";
 import { Text, View, TouchableOpacity, Alert } from "react-native";
 import { Input } from "../../components/Input";
@@ -21,8 +21,11 @@ export default function Home() {
     const [data, setData] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
     const [filteredData, setFilteredData] = useState([]);
-    const {supplyList} = useContext(AuthContextList)
-    
+    const [selectedItem, setSelectedItem] = useState(null);
+    const [modalVisible, setModalVisible] = useState(false);
+    const [observation, setObservation] = useState("");
+    const { supplyList } = useContext(AuthContextList);
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -56,9 +59,30 @@ export default function Home() {
         }
     };
 
+    const handleCardPress = (item) => {
+        setSelectedItem(item);
+        setObservation(item.observacao || "");
+        setModalVisible(true);
+    };
+
+    const handleSave = async () => {
+        try {
+            const updatedItem = { ...selectedItem, observacao: observation };
+            await api.put(`/abastecimento/${selectedItem.id}/observacao`, updatedItem);
+            const updatedData = data.map((item) =>
+                item.id === selectedItem.id ? updatedItem : item
+            );
+            setData(updatedData);
+            setFilteredData(updatedData);
+            setModalVisible(false);
+        } catch (error) {
+            Alert.alert("Erro ao salvar", error.message);
+        }
+    };
+
     const _renderCard = (item) => {
         return (
-            <TouchableOpacity style={style.card}>
+            <TouchableOpacity style={style.card} onPress={() => handleCardPress(item)}>
                 <View style={style.rowCardTop}>
                     <Text style={style.tituloCard}>Carro:<Text style={style.subTituloCard}>{item.carro}</Text></Text>
                     <Text style={style.tituloCard}>Motorista:<Text style={style.subTituloCard}>{item.motorista}</Text></Text>
@@ -105,6 +129,28 @@ export default function Home() {
                     />
                 )}
             </View>
+
+            <Modal visible={modalVisible} animationType="slide" transparent>
+                <View style={style.modalContainer}>
+                    <View style={style.modalContent}>
+                        <Text style={style.modalTitle}>Adicionar uma Observação</Text>
+                        <TextInput
+                            style={style.input}
+                            value={observation}
+                            onChangeText={setObservation}
+                            placeholder="Digite a observação..."
+                        />
+                        <View style={style.modalButtons}>
+                            <TouchableOpacity style={style.closeButton} onPress={() => setModalVisible(false)}>
+                                <Text style={style.buttonText}>Fechar</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={style.saveButton} onPress={handleSave}>
+                                <Text style={style.buttonText}>Salvar</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </View>
+            </Modal>
         </View>
     );
 }
